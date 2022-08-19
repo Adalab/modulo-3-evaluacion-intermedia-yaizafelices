@@ -24,9 +24,19 @@ function App() {
   const handleNewQuote = (event) => {
     setNewQuote({
       ...newQuote,
-      
+      [event.target.id]: event.target.value
     })
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+      setQuote([...quote, newQuote]);
+      setNewQuote({
+        quote:"",
+        character:"",
+      })
+  }
+
 
 
 //   const[quoteFriends, setQuoteFriends] = useState("");
@@ -47,7 +57,33 @@ function App() {
       </header>
       
       <main>
-        <ul>{renderQuotesFriends}</ul>
+        <section>
+          <ul>{renderQuotesFriends}</ul>
+        </section>
+        <section>
+          <h2>Añadir una nueva Frase</h2>
+          <form>
+          <label>
+              Frase
+              <input
+                type="text"
+                onChange={handleNewQuote}
+                id="quote"
+                value={newQuote.quote}
+              ></input>
+            </label>
+            <label>
+              Personaje
+              <input
+                type="text"
+                onChange={handleNewQuote}
+                id="character"
+                value={newQuote.character}
+              ></input>
+            </label>
+            <button onClick={handleSubmit} >Añadir una nueva frase</button>
+          </form>
+        </section>
       </main>
   
 
