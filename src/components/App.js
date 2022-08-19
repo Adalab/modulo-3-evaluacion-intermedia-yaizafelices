@@ -14,11 +14,17 @@ function App() {
   })
 
   const [filteredQuote, setFilteredQuote] = useState("");
+
+  const [filteredCharacter, setFilteredCharacter] = useState("Todos");
  
 
   const handleFilterQuote = (event) => {
     event.preventDefault();
     setFilteredQuote(event.target.value);
+  };
+
+  const handleFilterCharacter = (event) => {
+    setFilteredCharacter(event.target.value);
   };
 
   const renderQuotesFriends = quote
@@ -82,15 +88,23 @@ function App() {
                 value={filteredQuote}
               ></input>
             </label>
-            {/* <label>
+            <label>
               Filtrar por personaje
-              <input
-                type="text"
-                onChange={handleFilter}
-                id="filtercharacter"
-                value={filteredQuote}
-              ></input>
-            </label> */}
+              <select
+                name="filteredCharacter"
+                onChange={handleFilterCharacter}
+                id="filteredCharacter"
+                value={filteredCharacter}
+              >
+                <option value="">Todos</option>
+                <option value="Ross">Ross</option>
+                <option value="Monica">Monica</option>
+                <option value="Joey">Joey</option>
+                <option value="Phoebe">Phoebe</option>
+                <option value="Chandler">Chandler</option>
+                <option value="Rachel">Rachel</option>
+              </select>
+            </label>
         </section>
         <section>
           <ul>{renderQuotesFriends}</ul>
