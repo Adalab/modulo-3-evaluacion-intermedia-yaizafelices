@@ -58,6 +58,26 @@ function App() {
       
       <main>
         <section>
+        <label>
+              Filtrar por frase
+              <input
+                type="text"
+                onChange={handleFilter}
+                id="filterquote"
+                value={.quote}
+              ></input>
+            </label>
+            {/* <label>
+              Filtrar por personaje
+              <input
+                type="text"
+                onChange={handleFilter}
+                id="filtercharacter"
+                value={.character}
+              ></input>
+            </label> */}
+        </section>
+        <section>
           <ul>{renderQuotesFriends}</ul>
         </section>
         <section>
