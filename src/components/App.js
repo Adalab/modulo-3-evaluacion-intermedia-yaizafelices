@@ -32,6 +32,10 @@ function App() {
     return oneQuote.quote.toLowerCase().includes(filteredQuote.toLowerCase());
   })
 
+  // .filter((oneQuote)  => {
+  //   return oneQuote.character.toLowerCase().includes(filteredCharacter.toLowerCase());
+  // })
+
   .map((oneQuote, index) => {
     return (
     <li key={index}>
