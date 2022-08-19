@@ -13,13 +13,27 @@ function App() {
     character:"",
   })
 
-  const renderQuotesFriends = quote.map((oneQuote, index) =>{
+  const [filteredQuotes, setFilteredQuotes] = useState ({
+    filterQuote: "",
+    filterCharacter: "",
+  })
+
+  const renderQuotesFriends = quote
+  .filter((oneQuote)  => {
+    return oneQuote.quote.toLowerCase().includes(filteredQuotes.filterQuote.toLowerCase());
+  })
+
+  .map((oneQuote, index) => {
     return (
     <li key={index}>
       <p>{oneQuote.quote} <span>-{oneQuote.character}</span></p>
       
     </li>)
   });
+
+  const handleFilter = (ev) => {
+    setFilteredQuotes({ ...filteredQuotes, [ev.target.id]: ev.target.value });
+  };
 
   const handleNewQuote = (event) => {
     setNewQuote({
@@ -64,18 +78,18 @@ function App() {
                 type="text"
                 onChange={handleFilter}
                 id="filterquote"
-                value={.quote}
+                value={filteredQuotes.quote}
               ></input>
             </label>
-            {/* <label>
+            <label>
               Filtrar por personaje
               <input
                 type="text"
                 onChange={handleFilter}
                 id="filtercharacter"
-                value={.character}
+                value={filteredQuotes.character}
               ></input>
-            </label> */}
+            </label>
         </section>
         <section>
           <ul>{renderQuotesFriends}</ul>
