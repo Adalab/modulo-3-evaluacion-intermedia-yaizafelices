@@ -1,21 +1,26 @@
 import '../styles/App.scss';
 
-import quotes from '../data/quotes.json';
+// import quotes from '../data/quotes.json';
+import getDataApi from '../services/Api';
 
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 function App() {
 
-  const [quote, setQuote] =useState(quotes);
-
+  const [quote, setQuote] =useState([]);
   const [newQuote, setNewQuote] = useState({
     quote:"",
     character:"",
   })
-
   const [filteredQuote, setFilteredQuote] = useState("");
-
   const [filteredCharacter, setFilteredCharacter] = useState("all");
+  const [errorMsg, setErrorMsg] = useState('');
+
+  useEffect(()=>{
+    getDataApi().then(data=>{
+      setQuote(data);
+    });
+  },[]);
  
 
   const handleFilterQuote = (event) => {
@@ -49,6 +54,12 @@ function App() {
     </li>)
   });
 
+  const noQuote= ()=>{
+    if(renderQuotesFriends.length ===0){
+      return <p>{`Lo siento no existe la frase: ${filteredQuote}`}</p>
+    }
+  }
+
 
 
   const handleNewQuote = (event) => {
@@ -60,24 +71,21 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (newQuote.quote !== '' && newQuote.character !== '') {
       setQuote([...quote, newQuote]);
       setNewQuote({
         quote:"",
         character:"",
       })
+      setErrorMsg('');
   }
+  else{
+    setErrorMsg(
+      <p>Debes de rellenar ambos campos para poder añadir una frase </p>
+    )
+  }
+}
 
-
-
-//   const[quoteFriends, setQuoteFriends] = useState("");
-
-//   useEffect(() => {
-//     fetch('https://beta.adalab.es/curso-intensivo-fullstack-recursos/apis/quotes-friends-tv-v1/quotes.json')
-//     .then((response) => response.json())
-//     .then((responseData) => {
-//       setQuoteFriends(responseData.quoteFriends);
-//     });
-// }, []);
 
 
   return (
@@ -120,10 +128,11 @@ function App() {
           </form>
         </section>
         <section>
-          <ul>{renderQuotesFriends}</ul>
+          <ul>{renderQuotesFriends} {noQuote()}</ul>
         </section>
         <section>
           <h2>Añadir una nueva Frase</h2>
+          {errorMsg}
           <form>
           <label htmlFor='quote'>
               Frase
