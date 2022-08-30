@@ -83,15 +83,18 @@ function App() {
       
       <main>
         <section>
-        <label>
-              Filtrar por frase
-              <input
-                type="text"
-                onChange={handleFilterQuote}
-                id="filteredQuote"
-                value={filteredQuote}
-              ></input>
-            </label>
+          <form>
+            <label>
+                  Filtrar por frase
+                  <input
+                    type="text"
+                    onChange={handleFilterQuote}
+                    id="filteredQuote"
+                    value={filteredQuote}
+                  ></input>
+              </label>
+          </form>
+          <form>
             <label>
               Filtrar por personaje
               <select
@@ -109,6 +112,7 @@ function App() {
                 <option value="Rachel">Rachel</option>
               </select>
             </label>
+          </form>
         </section>
         <section>
           <ul>{renderQuotesFriends}</ul>
