@@ -84,7 +84,7 @@ function App() {
       <main>
         <section>
           <form>
-            <label>
+            <label htmlFor='filteredQuote'>
                   Filtrar por frase
                   <input
                     type="text"
@@ -95,7 +95,7 @@ function App() {
               </label>
           </form>
           <form>
-            <label>
+            <label htmlFor='filteredCharacter'>
               Filtrar por personaje
               <select
                 name="filteredCharacter"
@@ -120,7 +120,7 @@ function App() {
         <section>
           <h2>Añadir una nueva Frase</h2>
           <form>
-          <label>
+          <label htmlFor='quote'>
               Frase
               <input
                 type="text"
@@ -129,7 +129,7 @@ function App() {
                 value={newQuote.quote}
               ></input>
             </label>
-            <label>
+            <label htmlFor='character'>
               Personaje
               <input
                 type="text"
